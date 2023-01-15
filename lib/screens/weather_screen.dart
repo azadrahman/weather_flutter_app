@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/screens/city_screen.dart';
+import 'package:weather/screens/notes_screen.dart';
 import 'package:weather/services/weather_model.dart';
 
 class WeatherScreen extends StatefulWidget {
@@ -51,41 +52,64 @@ class _WeatherScreenState extends State<WeatherScreen> {
       backgroundColor: Colors.black12,
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           child: Column(
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextButton(onPressed: () async{
-                    var weatherData = await weather.getLocationWeatherData();
-                    updateUI(weatherData);
-                  }, child: Icon(Icons.near_me, size: 50,),),
+                  Container(
+                    child: Row(
+                      children: [
+                        TextButton(
+                          onPressed: () async{
+                          var weatherData = await weather.getLocationWeatherData();
+                          updateUI(weatherData);
+                        },
+                          child: const Icon(Icons.near_me, size: 50,),),
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => NotesScreen()));
+                          },
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)
+                              ),
+                            ),
+
+                          ),
+                          child: const Text('Notes')
+                      ),
+                      ],
+                    ),
+                  ),
+
                   TextButton(onPressed: () async{
                     var typedName = await Navigator.push(context, MaterialPageRoute(builder: (context) => CityScreen()));
                     if(typedName != null) {
                       var weatherData = await weather.getCityWeatherData(typedName);
                       updateUI(weatherData);
                     }
-                  }, child: Icon(Icons.location_city, size: 50,),),
+                  }, child: const Icon(Icons.location_city, size: 50,),),
                 ],
               ),
 
               Padding(
-                padding: EdgeInsets.only(top: 40),
+                padding:const EdgeInsets.only(top: 40),
                 child: Row(
                   children: [
-                    Text('$temperature∘', style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),),
-                    SizedBox(width: 15,),
-                    Text('$msgIcon', style: TextStyle(fontSize: 30,),),
+                    Text('$temperature∘', style:const TextStyle(fontSize: 60, fontWeight: FontWeight.bold),),
+                    const SizedBox(width: 15,),
+                    Text(msgIcon, style: const TextStyle(fontSize: 30,),),
                   ],
                 ),
               ),
 
-              SizedBox(height: 10,),
-              Text('$weatherDescription', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
-              SizedBox(height: 10,),
-              Text('$weatherMsg in $cityName', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),)
+              const SizedBox(height: 10,),
+              Text(weatherDescription, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
+              const SizedBox(height: 10,),
+              Text('$weatherMsg in $cityName', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),)
             ],
           ),
         ),
