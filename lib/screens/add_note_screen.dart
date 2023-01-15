@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:weather/models/notes_data.dart';
 
 class AddNoteScreen extends StatefulWidget {
-  final Function addNoteCallback;
-
-  AddNoteScreen(this.addNoteCallback);
 
   @override
   State<AddNoteScreen> createState() => _AddNoteScreenState();
@@ -11,7 +10,6 @@ class AddNoteScreen extends StatefulWidget {
 
 class _AddNoteScreenState extends State<AddNoteScreen> {
   String? newNoteText;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,13 +41,13 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 setState(() {
                   newNoteText = value;
                 });
-
               },
             ),
             const SizedBox(height: 8,),
             ElevatedButton(
                 onPressed: () {
-              widget.addNoteCallback(newNoteText);
+              Provider.of<NoteData>(context, listen: false).addNote(newNoteText!);
+              Navigator.pop(context);
             }, child: const Text('Add')),
           ],
         ),
