@@ -69,7 +69,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           child: const Icon(Icons.near_me, size: 50,),),
                       ElevatedButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => NotesScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => NotesScreen(),));
                           },
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(

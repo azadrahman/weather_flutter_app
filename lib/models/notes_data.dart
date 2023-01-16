@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'notes_model.dart';
 
 class NoteData extends ChangeNotifier {
-  final List<NoteModel> _notes = [
-    NoteModel(title: "Hi there", isDone: false),
-    NoteModel(title: "New Notes", isDone: false),
-  ];
+  final List<NoteModel> _notes = [];
 
   UnmodifiableListView<NoteModel> get notes {
     return UnmodifiableListView(_notes);
@@ -22,8 +19,14 @@ class NoteData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateNote(NoteModel note) {
+  void updateNoteCheckbox(NoteModel note) {
     note.toggleDone();
+    notifyListeners();
+  }
+
+  void updateNote(String updateTitle, int index) {
+    final note = NoteModel(title: updateTitle);
+    _notes[index] = note;
     notifyListeners();
   }
 

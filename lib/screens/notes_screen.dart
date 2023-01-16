@@ -4,14 +4,8 @@ import 'package:weather/models/notes_data.dart';
 import 'package:weather/screens/add_note_screen.dart';
 import '../widgets/notes_list.dart';
 
-class NotesScreen extends StatefulWidget {
+class NotesScreen extends StatelessWidget {
   const NotesScreen({Key? key}) : super(key: key);
-
-  @override
-  State<NotesScreen> createState() => _NotesScreenState();
-}
-
-class _NotesScreenState extends State<NotesScreen> {
 
   @override
   Widget build(BuildContext context) {
