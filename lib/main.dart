@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData.dark(),
-        home: SafeArea(
-            child: LoadingScreen()
+        home: const SafeArea(
+          child: LoadingScreen(),
         ),
       ),
     );

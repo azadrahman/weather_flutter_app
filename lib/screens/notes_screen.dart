@@ -17,18 +17,42 @@ class NotesScreen extends StatelessWidget {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.all(30),
-              child:Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 30,
-                    child: Icon(Icons.note_add_outlined, size: 30,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 30,
+                        child: Icon(
+                          Icons.note_add_outlined,
+                          size: 30,
+                        ),
+                      ),
+                      GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: const Icon(
+                            Icons.home,
+                            size: 30,
+                          ))
+                    ],
                   ),
-                 const SizedBox(height: 10,),
-                 const Text('Today\'s notes', style: TextStyle(fontSize: 40,fontWeight: FontWeight.w900),),
-                const  SizedBox(height: 10,),
-                 Text('${Provider.of<NoteData>(context).notesCount} notes', style: const TextStyle(color: Colors.white70, fontSize: 18),)
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    'Today\'s notes',
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    '${Provider.of<NoteData>(context).notesCount} notes',
+                    style: const TextStyle(color: Colors.white70, fontSize: 18),
+                  )
                 ],
               ),
             ),
@@ -48,11 +72,15 @@ class NotesScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          showModalBottomSheet(context: context, builder: (context) => AddNoteScreen());
+        onPressed: () {
+          showModalBottomSheet(
+              context: context, builder: (context) => AddNoteScreen());
         },
         backgroundColor: Colors.lightBlueAccent,
-        child: const Icon(Icons.add, color: Colors.white,),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }

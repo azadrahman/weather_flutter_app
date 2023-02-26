@@ -6,23 +6,28 @@ import 'package:weather/services/weather_model.dart';
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
 
-
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-
   @override
-  void initState(){
+  void initState() {
     super.initState();
     getLocation();
   }
 
-  void getLocation() async{
+  void getLocation() async {
     WeatherModel weather = WeatherModel();
-    var weatherData = await weather.getLocationWeatherData();
-    Navigator.push(context, MaterialPageRoute(builder: (context) => WeatherScreen(weatherData: weatherData,)));
+    var weatherData = await weather.getLocationWeatherData(context);
+    if (mounted) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => WeatherScreen(
+                    weatherData: weatherData,
+                  )));
+    }
   }
 
   @override
@@ -31,9 +36,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
       backgroundColor: Colors.black45,
       body: Center(
         child: SpinKitDoubleBounce(
-        color: Colors.white,
-        size: 100,
-      ),
+          color: Colors.white,
+          size: 100,
+        ),
       ),
     );
   }
